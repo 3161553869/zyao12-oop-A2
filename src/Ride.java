@@ -220,6 +220,12 @@ public class Ride implements RideInterface {
         }
     }
 
-
+    /**
+     * Sorts the ride history by visitor names.
+     */
+    public void sortRideHistory() {
+        Collections.sort(rideHistory, new VisitorComparator());
+        System.out.println("Ride history has been sorted.");
+    }
 
 }

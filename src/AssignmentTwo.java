@@ -119,7 +119,23 @@ public class AssignmentTwo {
      * Part 5: Simulates a full cycle of adding visitors, running the ride, and displaying results.
      */
     public void partFive() {
-       
+        // Create Ride and Operator
+        Employee operator = new Employee("Bob", 40, "Male", "E102", "Ride Operator");
+        Ride rollerCoaster = new Ride("Roller Coaster", 2, operator);
+
+        // Add visitors to queue
+        addMultipleVisitorsToQueue(rollerCoaster);
+
+        // Print the queue before and after the cycle
+        System.out.println("\nVisitors in queue before the cycle:");
+        rollerCoaster.printQueue();
+        rollerCoaster.runOneCycle();
+        System.out.println("\nVisitors in queue after the cycle:");
+        rollerCoaster.printQueue();
+
+        // Print ride history
+        System.out.println("\nRide history:");
+        rollerCoaster.printRideHistory();
     }
 
     /**

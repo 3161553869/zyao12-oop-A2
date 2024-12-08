@@ -22,7 +22,19 @@ public class AssignmentTwo {
      * Part 3: Demonstrates adding visitors to the queue and removing them.
      */
     public void partThree() {
-       
+        // Create a Ride Operator
+        Employee operator = new Employee("Alice", 35, "Female", "E101", "Ride Operator");
+
+        // Create a Ride object
+        Ride rollerCoaster = new Ride("Roller Coaster", 2, operator);
+
+        // Add visitors to the queue
+        addVisitorsToQueue(rollerCoaster);
+
+        // Print the queue, remove a visitor, and print again
+        rollerCoaster.printQueue();
+        rollerCoaster.removeVisitorFromQueue();
+        rollerCoaster.printQueue();
     }
 
     /**

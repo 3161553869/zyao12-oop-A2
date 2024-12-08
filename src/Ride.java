@@ -100,6 +100,125 @@ public class Ride implements RideInterface {
         return visitorQueue.size();
     }
 
+    // Queue-related methods
+
+    /**
+     * Adds a visitor to the ride's queue.
+     *
+     * @param visitor the visitor to be added to the queue
+     */
+    @Override
+    public void addVisitorToQueue(Visitor visitor) {
+        visitorQueue.add(visitor);
+        System.out.println(visitor.getName() + " has joined the queue for " + rideName + ".");
+    }
+
+    /**
+     * Removes a visitor from the ride's queue.
+     */
+    @Override
+    public void removeVisitorFromQueue() {
+        Visitor removedVisitor = visitorQueue.poll();
+        if (removedVisitor != null) {
+            System.out.println(removedVisitor.getName() + " has been removed from the queue for " + rideName + ".");
+        } else {
+            System.out.println("The queue for " + rideName + " is empty. No visitor to remove.");
+        }
+    }
+
+    /**
+     * Prints the current visitor queue.
+     */
+    @Override
+    public void printQueue() {
+        if (visitorQueue.isEmpty()) {
+            System.out.println("The queue for " + rideName + " is currently empty.");
+        } else {
+            System.out.println("Visitors in the queue for " + rideName + ":");
+            for (Visitor visitor : visitorQueue) {
+                System.out.println("- " + visitor.getName() + " (Age: " + visitor.getAge() + ")");
+            }
+        }
+    }
+
+    /**
+     * Runs one cycle of the ride, allowing up to the maximum number of riders.
+     */
+    @Override
+    public void runOneCycle() {
+        if (operator == null) {
+            System.out.println("The ride " + rideName + " cannot be run because no operator is assigned.");
+            return;
+        }
+
+        if (visitorQueue.isEmpty()) {
+            System.out.println("The ride " + rideName + " cannot be run because the queue is empty.");
+            return;
+        }
+
+        int riders = 0;
+        System.out.println("Running one cycle for " + rideName + "...");
+        while (riders < maxRiders && !visitorQueue.isEmpty()) {
+            Visitor visitor = visitorQueue.poll();
+            if (visitor != null) {
+                addVisitorToHistory(visitor);
+                System.out.println(visitor.getName() + " is enjoying the ride " + rideName + ".");
+                riders++;
+            }
+        }
+
+        numOfCycles++;
+        System.out.println("Cycle completed. Total cycles run for " + rideName + ": " + numOfCycles);
+    }
+
+    /**
+     * Adds a visitor to the ride history after the ride cycle.
+     *
+     * @param visitor the visitor to be added
+     */
+    @Override
+    public void addVisitorToHistory(Visitor visitor) {
+        rideHistory.add(visitor);
+        System.out.println(visitor.getName() + " has been added to the ride history for " + rideName + ".");
+    }
+
+    /**
+     * Checks if a visitor has taken the ride before.
+     *
+     * @param visitor the visitor to check
+     * @return true if the visitor has ridden, false otherwise
+     */
+    @Override
+    public boolean checkVisitorFromHistory(Visitor visitor) {
+        boolean found = rideHistory.contains(visitor);
+        System.out.println(visitor.getName() + " is " + (found ? "" : "not ") + "in the ride history for " + rideName + ".");
+        return found;
+    }
+
+    /**
+     * Gets the total number of visitors who have taken the ride.
+     *
+     * @return number of visitors
+     */
+    @Override
+    public int numberOfVisitors() {
+        return rideHistory.size();
+    }
+
+    /**
+     * Prints the entire ride history.
+     */
+    @Override
+    public void printRideHistory() {
+        if (rideHistory.isEmpty()) {
+            System.out.println("No visitors have taken the ride " + rideName + " yet.");
+        } else {
+            System.out.println("Ride history for " + rideName + ":");
+            for (Visitor visitor : rideHistory) {
+                System.out.println("- " + visitor.getName() + " (Age: " + visitor.getAge() + ")");
+            }
+        }
+    }
 
 
 

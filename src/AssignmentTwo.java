@@ -160,13 +160,30 @@ public class AssignmentTwo {
      * Part 6: Exports the ride history to a file.
      */
     public void partSix() {
-        
+        // Create Ride and Operator
+        Employee operator = new Employee("Alice", 35, "Female", "E101", "Ride Operator");
+        Ride rollerCoaster = new Ride("Roller Coaster", 2, operator);
+
+        // Add visitors to history
+        addVisitorsToHistory(rollerCoaster);
+
+        // Export ride history to a CSV file
+        String filename = "f1.csv";
+        rollerCoaster.exportRideHistory(filename);
     }
 
     /**
      * Part 7: Imports ride history from a file and displays visitor count and queue.
      */
     public void partSeven() {
+        // Create Ride and Operator
+        Employee operator = new Employee("Alice", 35, "Female", "E101", "Ride Operator");
+        Ride rollerCoaster = new Ride("Roller Coaster", 2, operator);
 
+        // Import ride history and print visitor details
+        rollerCoaster.importRideHistory("f1.csv");
+        System.out.println("The number of Visitors: " + rollerCoaster.getSizeOfVisitorQueue() + "\n");
+        System.out.println("All Visitors:");
+        rollerCoaster.printQueue();
     }
 }

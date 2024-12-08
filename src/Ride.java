@@ -228,4 +228,51 @@ public class Ride implements RideInterface {
         System.out.println("Ride history has been sorted.");
     }
 
+    /**
+     * Exports the ride history to a CSV file.
+     *
+     * @param filename the file name to export to
+     */
+    public void exportRideHistory(String filename) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (Visitor visitor : rideHistory) {
+                writer.write(visitor.getName() + "," + visitor.getAge() + "," + visitor.getGender() + ","
+                        + visitor.getTicketId() + "," + visitor.getMembershipId() + "\n");
+            }
+            System.out.println("Ride history has been successfully exported to " + filename);
+        } catch (IOException e) {
+            System.out.println("An error occurred while exporting ride history: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Imports ride history from a CSV file.
+     *
+     * @param filename the file name to import from
+     */
+    public void importRideHistory(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 5) {
+                    String name = data[0];
+                    int age = Integer.parseInt(data[1]);
+                    String gender = data[2];
+                    String ticketId = data[3];
+                    int membershipId = Integer.parseInt(data[4]);
+
+                    Visitor visitor = new Visitor(name, age, gender, ticketId, membershipId);
+                    visitorQueue.add(visitor);
+                }
+            }
+            System.out.println("Ride history has been successfully imported from " + filename);
+        } catch (IOException e) {
+            System.out.println("An error occurred while importing ride history: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number format in file: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        }
+    }
 }

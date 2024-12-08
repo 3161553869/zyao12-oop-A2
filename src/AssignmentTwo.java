@@ -54,7 +54,20 @@ public class AssignmentTwo {
      * Part 4A: Demonstrates adding visitors to the ride history and checking them.
      */
     public void partFourA() {
-        
+        // Create Ride and Operator
+        Employee operator = new Employee("Alice", 35, "Female", "E101", "Ride Operator");
+        Ride rollerCoaster = new Ride("Roller Coaster", 2, operator);
+
+        // Add visitors to history
+        addVisitorsToHistory(rollerCoaster);
+
+        // Check visitor history and print results
+        rollerCoaster.checkVisitorFromHistory(new Visitor("Benny", 28, "Male", "V103", 11111));
+        rollerCoaster.checkVisitorFromHistory(new Visitor("Demo", 29, "Male", "V106", 3333));
+
+        // Print the history
+        System.out.println("Total visitors in ride history: " + rollerCoaster.numberOfVisitors());
+        rollerCoaster.printRideHistory();
     }
 
     /**
@@ -74,7 +87,19 @@ public class AssignmentTwo {
      * Part 4B: Demonstrates sorting the ride history by visitor name and age.
      */
     public void partFourB() {
+        // Create Ride and Operator
+        Employee operator = new Employee("Bob", 40, "Male", "E102", "Ride Operator");
+        Ride thunderStorm = new Ride("Thunderstorm", 4, operator);
 
+        // Add visitors to ride history
+        addVisitorsForSorting(thunderStorm);
+
+        // Print ride history before and after sorting
+        System.out.println("Before sorting:");
+        thunderStorm.printRideHistory();
+        thunderStorm.sortRideHistory();
+        System.out.println("After sorting:");
+        thunderStorm.printRideHistory();
     }
 
     /**
